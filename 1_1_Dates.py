@@ -4,6 +4,8 @@
 #
 # Name:
 #
+import random
+import time
 
 class Date:
     """ a user-defined data structure that
@@ -40,6 +42,7 @@ class Date:
         elif self.year % 4 == 0: return True
         return False
 
+
     def copy(self):
         """ Return a date object that is the same as the date in reference
         """
@@ -66,7 +69,6 @@ class Date:
             self.year += 1
             self.month = 1
             self.day = 1
-        print self
 
     def yesterday(self):
         """make the day yesterday. also prints the new day for testing purposes
@@ -81,7 +83,6 @@ class Date:
             self.day = MDays[11]
             self.month = 12
             self.year -= 1
-        print self
 
     def addNDays(self, N):
         """add n days
@@ -117,9 +118,80 @@ class Date:
         else:
             return False
 
-    def
-d = Date(12,14,2012)
-d2 = Date(2,18,2013)
-for i in range(0,100):
-    print d.isBefore(d2)
-    d.tomorrow()
+    def daysInMonth(self,year,month):
+        MDays = [31,28 + Date(1,1,year).isLeapYear(),31,30,31,30,31,31,30,31,30,31]
+        return MDays[month-1]
+
+    def diff(self, d2):
+        """ counts dates between efficiently and stubbornly
+        """
+        if self.isBefore(d2):
+            start = self
+            end = d2
+        else:
+            start = d2
+            end = self
+        if self.equals(d2):
+            return 0
+        elif start.month == end.month and start.year == end.year:
+            x = end.day - start.day
+        elif start.year == end.year:
+            #count to end of month
+            x = self.daysInMonth(start.year,start.month) - start.day
+            #count months between
+            for i in range(start.month + 1, end.month):
+                x += self.daysInMonth(start.year, i)
+            #count to end day
+            x += end.day
+        else:
+            #count to end of month
+            x = self.daysInMonth(start.year,start.month) - start.day
+            #count to end of year
+            for i in range(start.month+1, 13):
+                x += self.daysInMonth(start.year,i)
+            #count years inbetween dates
+            for i in range(start.year+1, end.year):
+                x += 366 if Date(1,1,i).isLeapYear() else 365
+            #count months in that year
+            for i in range(1,end.month):
+                x += self.daysInMonth(end.year, i)
+            #count days in that month
+            x += end.day
+
+        return x if self.isBefore(d2) else -x
+
+    def diffEasy(self, d2):
+        """Loops until days are equal
+        """
+        start = self if self.isBefore(d2) else d2
+        end = d2 if self.isBefore(d2) else self
+        x=0
+        while(start.isBefore(end)):
+            start.tomorrow()
+            x += 1
+        if self.isAfter(d2) == True:
+            x = -x
+        return x
+
+    def dow(self):
+        days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday","Sunday"]
+        return days[Date(3,6,2016).diff(self)%7-1]
+
+start = Date(1, 1, 2013)
+
+t0 = time.clock()
+Date(3,14,2016).diff(Date(4,14,2016))    # one month from now
+t1 = time.clock()
+print t1-t0
+t0 = time.clock()
+Date(3,14,2016).diff(Date(3,14,2017))    # one year from now
+t1 = time.clock()
+print t1-t0
+t0 = time.clock()
+Date(3,14,2016).diff(Date(3,14,2116))    # one hundred years from now
+t1 = time.clock()
+print t1-t0
+t0 = time.clock()
+Date(3,14,2016).diff(Date(1,1,0000))
+t1 = time.clock()
+print t1-t0

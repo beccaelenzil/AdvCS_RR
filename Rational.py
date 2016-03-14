@@ -1,3 +1,5 @@
+import math
+
 class Rational:
     def __init__(self, num, denom):
         """give a numerator and denominator for the rational number
@@ -29,3 +31,15 @@ class Rational:
         """return the string interpretation of the rational
         """
         return str(self.numerator)+"/"+str(self.denominator)
+
+    def simplify(self):
+        n = min(self.numerator, self.denominator)
+        for i in range(n,1,-1):
+            if self.numerator % i == 0 and self.denominator % i == 0:
+                self.numerator /= i
+                self.denominator /= i
+
+
+r = Rational(2,12)
+r.simplify()
+print r
