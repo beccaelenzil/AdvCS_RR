@@ -4,6 +4,8 @@
 # Name:
 #
 
+import os
+
 class Board:
     """ a datatype representing a C4 board
         with an arbitrary number of rows and cols
@@ -107,13 +109,52 @@ class Board:
                     return 1
                 elif self.data[row][col]+self.data[row-1][col-1]+self.data[row-2][col-2]+self.data[row-3][col-3] == -4:
                     return -1
+        for row in range(0,self.height-3):
+            for col in range(3,self.width):
+                if self.data[row][col]+self.data[row+1][col-1]+self.data[row+2][col-2]+self.data[row+3][col-3] == 4:
+                    return 1
+                elif self.data[row][col]+self.data[row+1][col-1]+self.data[row+2][col-2]+self.data[row+3][col-3] == -4:
+                    return -1
         return 0
+
     def checkWin(self):
+        """returns 1 for X win and -1 for O win
+        """
+        if self.checkHor() != 0:
+            return self.checkHor()
+        elif self.checkVert() != 0:
+            return self.checkVert()
+        elif self.checkSlant() != 0:
+            return self.checkSlant()
+        else:
+            return 0
 
+    def filterInput(self):
+        a = -1
+        while a not in [str(x) for x in range(self.width)]:
+            a = raw_input()
+        return int(a)
 
+    def hostGame(self):
+        move = -1
+        player = 1
+        while self.checkWin() == 0 and not self.isFull():
+            print self
+            if player == 1:
+                print "X: Choose Column..."
+                move = self.filterInput()
+                while not self.addMove(move,player):
+                    move = self.filterInput()
+            else:
+                print "O: Choose Column..."
+                move = self.filterInput()
+                while not self.addMove(move,player):
+                    move = self.filterInput()
+            player = -player
+        print self
+        a = ["*O WINS!*", "*X WINS!*"]
+        print a[self.checkWin()]
 
+b = Board(7,6)
 
-b = Board(2,2)
-b.setBoard("0011")
-b.isFull()
-print b
+b.hostGame()
