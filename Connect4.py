@@ -46,6 +46,10 @@ class Board:
     def addMove(self, col, ox):
         """moves in a column col for a player ox
         """
+        if ox == 'X':
+            ox = 1
+        elif ox == 'O':
+            ox = -1
         if col >= self.width or col < 0 or self.data[0][col] != 0:
             return False
         for row in range(self.height-1, -1,-1):

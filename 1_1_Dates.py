@@ -177,21 +177,7 @@ class Date:
         days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday","Sunday"]
         return days[Date(3,6,2016).diff(self)%7-1]
 
-start = Date(1, 1, 2013)
+start = Date(12, 1, 2015)
 
-t0 = time.clock()
-Date(3,14,2016).diff(Date(4,14,2016))    # one month from now
-t1 = time.clock()
-print t1-t0
-t0 = time.clock()
-Date(3,14,2016).diff(Date(3,14,2017))    # one year from now
-t1 = time.clock()
-print t1-t0
-t0 = time.clock()
-Date(3,14,2016).diff(Date(3,14,2116))    # one hundred years from now
-t1 = time.clock()
-print t1-t0
-t0 = time.clock()
-Date(3,14,2016).diff(Date(1,1,0000))
-t1 = time.clock()
-print t1-t0
+end = Date(3,15,2016)
+print end.diff(start)
