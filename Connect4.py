@@ -150,7 +150,47 @@ class Board:
             return self.checkSlant()
         else:
             return 0
+    def winsFor(self, ox):
+        if ox == 'X':
+            for row in range(3,self.height):
+                for col in range(3,self.width):
+                    if self.data[row][col]+self.data[row-1][col-1]+self.data[row-2][col-2]+self.data[row-3][col-3] == 4:
+                        return True
+            for row in range(0,self.height-3):
+                for col in range(3,self.width):
+                    if self.data[row][col]+self.data[row+1][col-1]+self.data[row+2][col-2]+self.data[row+3][col-3] == 4:
+                        return True
+            for row in range(3,self.height):
+                for col in range(0,self.width):
+                    if self.data[row][col]+self.data[row-1][col]+self.data[row-2][col]+self.data[row-3][col] == 4:
+                        return True
+            for row in range(3,self.height):
+                for col in range(3,self.width):
+                    if self.data[row][col]+self.data[row][col-1]+self.data[row][col-2]+self.data[row][col-3] == 4:
+                        return True
+            return False
+        elif ox == 'O':
+            for row in range(3,self.height):
+                for col in range(3,self.width):
+                    if self.data[row][col]+self.data[row-1][col-1]+self.data[row-2][col-2]+self.data[row-3][col-3] == -4:
+                        return True
+            for row in range(0,self.height-3):
+                for col in range(3,self.width):
+                    if self.data[row][col]+self.data[row+1][col-1]+self.data[row+2][col-2]+self.data[row+3][col-3] == -4:
+                        return True
+            for row in range(3,self.height):
+                for col in range(0,self.width):
+                    if self.data[row][col]+self.data[row-1][col]+self.data[row-2][col]+self.data[row-3][col] == -4:
+                        return True
+            for row in range(3,self.height):
+                for col in range(3,self.width):
+                    if self.data[row][col]+self.data[row][col-1]+self.data[row][col-2]+self.data[row][col-3] == -4:
+                        return True
+            return False
+        return False
 
+        print self.checkWin()
+        return test == self.checkWin()
     def filterInput(self):
         """waits until valid input is entered
         """
@@ -300,7 +340,6 @@ print "---------------------------------------------\n"
 
 # play your game with a friend, tell me who you played with, and confirm that everything works
 
-print "I played with ________"
+print "I played with Ben"
 print "Everything works!"
-print "or"
-print "It doesn't work"
+

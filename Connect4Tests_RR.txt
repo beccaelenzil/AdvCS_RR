@@ -1,2 +1,122 @@
-Please make the necessarychanges to your code or the tests (that are pasted at the end of your script) so that the tests pass
-for your implementation of connect four
+---------------------------------------------
+print a 7 x 6 board with the columns numbered
+---------------------------------------------
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+---------------
+ 0 1 2 3 4 5 6
+ 
+---------------------------------------------
+test addMove
+---------------------------------------------
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+|X| | | | | | |
+|O| | | | | | |
+|X| | |O|O|O|O|
+---------------
+ 0 1 2 3 4 5 6
+
+==
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+|X| | | | | | |
+|O| | | | | | |
+|X| | |O|O|O|O|
+---------------
+ 0 1 2 3 4 5 6
+ 
+---------------------------------------------
+test clear
+---------------------------------------------
+
+print an empty board
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+---------------
+ 0 1 2 3 4 5 6
+ 
+---------------------------------------------
+test allowsMove
+---------------------------------------------
+
+|O| |
+|X| |
+-----
+ 0 1
+ 
+b.allowsMove(-1) should be False ==  False
+b.allowsMove(0) should be False ==  False
+b.allowsMove(1) should be True ==  True
+b.allowsMove(2) should be False ==  False
+ 
+---------------------------------------------
+test isFull
+---------------------------------------------
+
+| | |
+| | |
+-----
+ 0 1
+ 
+b.isFull() should be False ==  False
+ 
+|O|O|
+|X|X|
+-----
+ 0 1
+ 
+b.isFull() should be True ==  True
+ 
+---------------------------------------------
+test delMove
+---------------------------------------------
+
+|O|O|
+|X|X|
+-----
+ 0 1
+after the following commands: 
+ b.delMove(1) 
+ b.delMove(1) 
+ b.delMove(1) 
+ b.delMove(0) 
+ The board should look like: 
+ | | | 
+ |X| | 
+ -----
+  0 1 
+  == 
+| | |
+|X| |
+-----
+ 0 1
+ 
+---------------------------------------------
+test winsFor
+---------------------------------------------
+
+if b.setBoard( '00102030' ), then b.winsFor('X') should be True ==  True
+if b.setBoard( '00102030' ), then b.winsFor('O') should be True ==  True
+if b.setBoard( '23344545515'  ), then b.winsFor('X') should be True ==  True
+if b.setBoard( '23344545515'  ), then b.winsFor('O') should be False ==  False
+ 
+---------------------------------------------
+host game
+---------------------------------------------
+
+I played with Ben
+Everything works!

@@ -3,11 +3,28 @@ class board:
     def __init__(self,width,height):
         self.width = width
         self.height = height
-        self.hWalls = [[0]*(width-2) for i in range(height-2)]
-        self.vWalls = [[0]*(width-2) for i in range(height-2)]
-        self.fPawn = [0,int(width/2)]
-        self.sPawn = [height-1,int(width/2)]
-
+        self.hWalls = [[0]*(width) for i in range(height-1)]
+        self.vWalls = [[0]*(width-1) for i in range(height)]
+        self.spaces = [[' ']*width for i in range(height)]
+        self.spaces[0][int(self.width/2)] = '$'
+        self.spaces[self.height-1][int(self.width/2)] = '%'
     def __repr__(self):
-        for row in range(7):
-            
+        s = 'Quoridor\n----------\n'
+        for col in range(self.width):
+            s += '+-'
+        s += '+\n'
+        for row in range(self.height-1):
+            s += '|'
+            for col in range(self.width-1):
+                s += self.spaces[row][col]
+                s += '|' if self.vWalls[row][col] == 1 else ' '
+            s += self.spaces[row][self.width-1]
+            s += '|\n+'
+            for col in range(self.width-1):
+                s += '-' if self.hWalls == 1 else ' '
+                s += '+'
+            s += '\n'
+        return s
+
+q = board(7,7)
+print q
