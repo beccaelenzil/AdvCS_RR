@@ -44,6 +44,8 @@ class Board:
         return s       # the board is complete, return it
 
     def addMove(self, col, ox):
+        """moves in a column col for a player ox
+        """
         if col >= self.width or col < 0 or self.data[0][col] != 0:
             return False
         for row in range(self.height-1, -1,-1):
@@ -53,6 +55,8 @@ class Board:
         return False
 
     def setBoard(self,moveString):
+        """sets board according to a string
+        """
         next = 1
         for colString in moveString:
             col = int(colString)
@@ -61,23 +65,31 @@ class Board:
             next = -next
 
     def allowsMove(self, col):
+        """checks if can move in column
+        """
         if col >= self.width or col < 0 or self.data[0][col] != 0:
             return False
         else:
             return True
 
     def clear(self):
+        """clears board
+        """
         for row in range(0,self.height):
             for col in range(0,self.width):
                 self.data[row][col] = 0
 
     def isFull(self):
+        """returns true if its full false otherwise
+        """
         for col in range(0,self.width):
             if self.data[0][col] == 0:
                 return False
         return True
 
     def delMove(self, c):
+        """removes the top chip and returns true, false if it cant
+        """
         for row in range(0, self.height):
             if self.data[row][c] != 0:
                 self.data[row][c] = 0
@@ -85,6 +97,8 @@ class Board:
         return False
 
     def checkHor(self):
+        """returns 1 for O win and -1 for X win 0 for no win. checks horizontally
+        """
         for row in range(3,self.height):
             for col in range(3,self.width):
                 if self.data[row][col]+self.data[row][col-1]+self.data[row][col-2]+self.data[row][col-3] == 4:
@@ -94,6 +108,8 @@ class Board:
         return 0
 
     def checkVert(self):
+        """returns 1 for O win and -1 for X win 0 for no win. checks vertically
+        """
         for row in range(3,self.height):
             for col in range(0,self.width):
                 if self.data[row][col]+self.data[row-1][col]+self.data[row-2][col]+self.data[row-3][col] == 4:
@@ -103,6 +119,8 @@ class Board:
         return 0
 
     def checkSlant(self):
+        """returns 1 for O win and -1 for X win 0 for no win. checks slants
+        """
         for row in range(3,self.height):
             for col in range(3,self.width):
                 if self.data[row][col]+self.data[row-1][col-1]+self.data[row-2][col-2]+self.data[row-3][col-3] == 4:
@@ -118,7 +136,7 @@ class Board:
         return 0
 
     def checkWin(self):
-        """returns 1 for X win and -1 for O win
+        """returns 1 for O win and -1 for X win 0 for no win
         """
         if self.checkHor() != 0:
             return self.checkHor()
@@ -130,12 +148,16 @@ class Board:
             return 0
 
     def filterInput(self):
+        """waits until valid input is entered
+        """
         a = -1
         while a not in [str(x) for x in range(self.width)]:
             a = raw_input()
         return int(a)
 
     def hostGame(self):
+        """plays game
+        """
         move = -1
         player = 1
         while self.checkWin() == 0 and not self.isFull():
@@ -152,7 +174,7 @@ class Board:
                     move = self.filterInput()
             player = -player
         print self
-        a = ["*O WINS!*", "*X WINS!*"]
+        a = ["*You Both Lose!*","*O WINS!*", "*X WINS!*"]
         print a[self.checkWin()]
 
 b = Board(7,6)
