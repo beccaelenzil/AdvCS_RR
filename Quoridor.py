@@ -20,10 +20,20 @@ class board:
                 s += '|' if self.vWalls[row][col] == 1 else ' '
             s += self.spaces[row][self.width-1]
             s += '|\n+'
-            for col in range(self.width-1):
-                s += '-' if self.hWalls == 1 else ' '
+            for col in range(self.width):
+                s += '-' if self.hWalls[row][col] == 1 else ' '
                 s += '+'
             s += '\n'
+        s += '|'
+        for col in range(self.width-1):
+            s += self.spaces[self.height-1][col]
+            s += '|' if self.vWalls[self.height-1][col] == 1 else ' '
+        s += self.spaces[row][self.width-1]
+        s += '|\n+'
+        for col in range(self.width):
+            s += '-'
+            s += '+'
+        s += '\n'
         return s
 
 q = board(7,7)
