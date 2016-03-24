@@ -67,10 +67,20 @@ class board:
         tries to move player p(0 or 1) to row, col
         :return: true if worked false otherwise
         """
-        if self.players[p] == [row+1,col+1]
+        if self.players[p] == [row-1,col] and self.hWalls[row][col] == 0:
+            self.players[p] = [row+1,col]
+        elif self.players[p] == [row+1,col] and self.hWalls[row-1][col] == 0:
+            self.players[p] = [row-1,col]
+        elif self.players[p] == [row,col-1] and self.vWalls[row][col] == 0:
+            self.players[p] = [row,col+1]
+        elif self.players[p] == [row,col+1] and self.vWalls[row][col-1] == 0:
+            self.plays[p] = [row,col-1]
+        else:
+            return False
 
 q = board(7,7)
 q.playWall(0,0,1)
 q.playWall(0,0,0)
 q.playWall(0,1,1)
+q.movePlayer(1,3,0)
 print q
