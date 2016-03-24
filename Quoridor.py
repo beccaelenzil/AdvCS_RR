@@ -62,25 +62,60 @@ class board:
             return True
         return False
 
+    def canMove(self,srow, scol, row,col):
+        """
+        row and col are possition p is player returns true if player p can move to position row col else false
+        """
+        if [srow,scol] == [row-1,col] and self.hWalls[row-1][col] == 0:
+            return True
+        elif [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+            return True
+        elif [srow,scol] == [row,col-1] and self.vWalls[row][col-1] == 0:
+            return True
+        elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+            return True
+        else:
+            return False
     def movePlayer(self,row,col,p):
         """
         tries to move player p(0 or 1) to row, col
         :return: true if worked false otherwise
         """
-        if self.players[p] == [row-1,col] and self.hWalls[row][col] == 0:
-            self.players[p] = [row+1,col]
-        elif self.players[p] == [row+1,col] and self.hWalls[row-1][col] == 0:
-            self.players[p] = [row-1,col]
-        elif self.players[p] == [row,col-1] and self.vWalls[row][col] == 0:
-            self.players[p] = [row,col+1]
-        elif self.players[p] == [row,col+1] and self.vWalls[row][col-1] == 0:
-            self.plays[p] = [row,col-1]
+        if self.canMove(self.players[p][0],self.players[p][1],row,col):#need to implement if other pawn is in way
+            self.players[p] = [row,col]
+            return True
         else:
             return False
+
+    def pathAvailable(self):
+        openNodes = [self.players[0]]
+        print openNodes
+        closedNodes = []
+        while openNodes == []:
+            tempNodes = openNodes
+            openNodes = [] # issues with pointers
+            for i in range(tempNodes):
+                closedNodes.append(tempNodes[i])
+                if tempNodes[i][1] == self.height-1:
+                    return True
+                if self.canMove(tempNodes[i][0],tempNodes[i][1],tempNodes[i][0]+1,tempNodes[i][1]) and [tempNodes[i][0]+1,tempNodes[i][1]] not in closedNodes:
+                    openNodes.append([tempNodes[i][0]+1,tempNodes[i][1]])
+                if self.canMove(tempNodes[i][0],tempNodes[i][1],tempNodes[i][0]-1,tempNodes[i][1]) and [tempNodes[i][0]-1,tempNodes[i][1]] not in closedNodes:
+                    openNodes.append([tempNodes[i][0]-1,tempNodes[i][1]])
+                if self.canMove(tempNodes[i][0],tempNodes[i][1],tempNodes[i][0],tempNodes[i][1]+1) and [tempNodes[i][0],tempNodes[i][1]+1] not in closedNodes:
+                    openNodes.append([tempNodes[i][0],tempNodes[i][1]]+1)
+                if self.canMove(tempNodes[i][0],tempNodes[i][1],tempNodes[i][0],tempNodes[i][1]-1) and [tempNodes[i][0],tempNodes[i][1]-1] not in closedNodes:
+                    openNodes.append([tempNodes[i][0],tempNodes[i][1]]-1)
+            print openNodes
+            print closedNodes
+        return False
+
+
+
 
 q = board(7,7)
 q.playWall(0,0,1)
 q.playWall(0,0,0)
-q.playWall(0,1,1)
-q.movePlayer(1,3,0)
+q.playWall(0,3,1)
 print q
+print q.pathAvailable()
