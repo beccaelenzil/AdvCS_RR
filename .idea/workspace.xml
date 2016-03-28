@@ -31,12 +31,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Quoridor.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Quoridor.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Quoridor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27272728">
+            <state vertical-scroll-proportion="0.0">
               <caret line="95" column="49" selection-start-line="95" selection-start-column="49" selection-end-line="95" selection-end-column="49" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RobotsandZombies.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RobotsandZombies.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.12875536">
+              <caret line="81" column="14" selection-start-line="81" selection-start-column="14" selection-end-line="81" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,6 +114,7 @@
         <option value="$PROJECT_DIR$/Connect4.py" />
         <option value="$PROJECT_DIR$/Connect4Tests_RR.txt" />
         <option value="$PROJECT_DIR$/Quoridor.py" />
+        <option value="$PROJECT_DIR$/RobotsandZombies.py" />
       </list>
     </option>
   </component>
@@ -162,7 +175,7 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager" selected="Python.Quoridor">
+  <component name="RunManager" selected="Python.RobotsandZombies">
     <configuration default="false" name="Connect4" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -210,6 +223,40 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="AdvCS_RR" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Quoridor.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="RobotsandZombies" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="AdvCS_RR" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RobotsandZombies.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="boxes" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="AdvCS_RR" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/boxes.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -336,16 +383,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.Connect4" />
       <item index="1" class="java.lang.String" itemvalue="Python.1_1_Dates" />
       <item index="2" class="java.lang.String" itemvalue="Python.Quoridor" />
+      <item index="3" class="java.lang.String" itemvalue="Python.RobotsandZombies" />
+      <item index="4" class="java.lang.String" itemvalue="Python.boxes" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Python.Quoridor" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Connect4" />
-        <item index="2" class="java.lang.String" itemvalue="Python.1_1_Dates" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.RobotsandZombies" />
+        <item index="1" class="java.lang.String" itemvalue="Python.boxes" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Quoridor" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Connect4" />
+        <item index="4" class="java.lang.String" itemvalue="Python.1_1_Dates" />
       </list>
     </recent_temporary>
   </component>
@@ -407,16 +458,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/boxes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DateTests_RR.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -451,9 +492,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Quoridor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27272728">
+        <state vertical-scroll-proportion="0.0">
           <caret line="95" column="49" selection-start-line="95" selection-start-column="49" selection-end-line="95" selection-end-column="49" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boxes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RobotsandZombies.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12875536">
+          <caret line="81" column="14" selection-start-line="81" selection-start-column="14" selection-end-line="81" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
