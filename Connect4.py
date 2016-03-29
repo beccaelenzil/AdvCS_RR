@@ -218,11 +218,10 @@ class Board:
                     move = self.filterInput()
             player = -player
         print self
-        a = ["*You Both Lose!*","*O WINS!*", "*X WINS!*"]
+        a = ["*You Both Lose!*","*X WINS!*", "*O WINS!*"]
         print a[self.checkWin()]
 
 b = Board(7,6)
-
 #b.hostGame()
 
 # Connect Four Tests

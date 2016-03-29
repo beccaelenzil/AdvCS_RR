@@ -1,4 +1,5 @@
 from visual import *
+from copy import *
 
 class board:
     def __init__(self,width,height):
@@ -66,16 +67,82 @@ class board:
         """
         row and col are possition p is player returns true if player p can move to position row col else false
         """
-        if [srow,scol] == [row-1,col] and self.hWalls[row-1][col] == 0:
-            return True
-        elif [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
-            return True
-        elif [srow,scol] == [row,col-1] and self.vWalls[row][col-1] == 0:
-            return True
-        elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
-            return True
+        if scol == 0 and srow == 0:
+            if [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+                return True
+            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+                return True
+            else:
+                return False
+        elif scol == 0 and srow == self.height-1:
+            if [srow,scol] == [row-1,col] and self.hWalls[row-1][col] == 0:
+                return True
+            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+                return True
+            else:
+                return False
+        elif scol == self.width-1 and srow == 0:
+            if [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+                return True
+            elif [srow,scol] == [row,col-1] and self.vWalls[row][col-1] == 0:
+                return True
+            else:
+                return False
+        elif scol == self.width -1 and scol == self.width:
+            if [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+                return True
+            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+                return True
+            else:
+                return False
+        elif scol == 0:
+            if [srow,scol] == [row-1,col] and self.hWalls[row-1][col] == 0:
+                return True
+            elif [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+                return True
+            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+                return True
+            else:
+                return False
+        elif scol == self.width - 1:
+            if [srow,scol] == [row-1,col] and self.hWalls[row-1][col] == 0:
+                return True
+            elif [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+                return True
+            elif [srow,scol] == [row,col-1] and self.vWalls[row][col-1] == 0:
+                return True
+            else:
+                return False
+        elif srow == 0:
+            if [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+                return True
+            elif [srow,scol] == [row,col-1] and self.vWalls[row][col-1] == 0:
+                return True
+            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+                return True
+            else:
+                return False
+        elif srow == self.height -1:
+            if [srow,scol] == [row-1,col] and self.hWalls[row-1][col] == 0:
+                return True
+            elif [srow,scol] == [row,col-1] and self.vWalls[row][col-1] == 0:
+                return True
+            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+                return True
+            else:
+                return False
         else:
-            return False
+            if [srow,scol] == [row-1,col] and self.hWalls[row-1][col] == 0:
+                return True
+            elif [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+                return True
+            elif [srow,scol] == [row,col-1] and self.vWalls[row][col-1] == 0:
+                return True
+            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+                return True
+            else:
+                return False
+
     def movePlayer(self,row,col,p):
         """
         tries to move player p(0 or 1) to row, col
@@ -89,25 +156,25 @@ class board:
 
     def pathAvailable(self):
         openNodes = [self.players[0]]
-        print openNodes
+        print 'open-start' + str(openNodes)
         closedNodes = []
-        while openNodes == []:
+        while openNodes != []:
             tempNodes = openNodes
             openNodes = [] # issues with pointers
-            for i in range(tempNodes):
+            for i in range(len(tempNodes)):
                 closedNodes.append(tempNodes[i])
-                if tempNodes[i][1] == self.height-1:
+                if tempNodes[i][0] == self.height-1:
                     return True
                 if self.canMove(tempNodes[i][0],tempNodes[i][1],tempNodes[i][0]+1,tempNodes[i][1]) and [tempNodes[i][0]+1,tempNodes[i][1]] not in closedNodes:
                     openNodes.append([tempNodes[i][0]+1,tempNodes[i][1]])
                 if self.canMove(tempNodes[i][0],tempNodes[i][1],tempNodes[i][0]-1,tempNodes[i][1]) and [tempNodes[i][0]-1,tempNodes[i][1]] not in closedNodes:
                     openNodes.append([tempNodes[i][0]-1,tempNodes[i][1]])
                 if self.canMove(tempNodes[i][0],tempNodes[i][1],tempNodes[i][0],tempNodes[i][1]+1) and [tempNodes[i][0],tempNodes[i][1]+1] not in closedNodes:
-                    openNodes.append([tempNodes[i][0],tempNodes[i][1]]+1)
+                    openNodes.append([tempNodes[i][0],tempNodes[i][1]+1])
                 if self.canMove(tempNodes[i][0],tempNodes[i][1],tempNodes[i][0],tempNodes[i][1]-1) and [tempNodes[i][0],tempNodes[i][1]-1] not in closedNodes:
-                    openNodes.append([tempNodes[i][0],tempNodes[i][1]]-1)
-            print openNodes
-            print closedNodes
+                    openNodes.append([tempNodes[i][0],tempNodes[i][1]-1])
+            print 'open' + str(openNodes)
+            print 'closed' + str(closedNodes)
         return False
 
 
