@@ -67,78 +67,80 @@ class board:
         """
         row and col are possition p is player returns true if player p can move to position row col else false
         """
+        if scol < 0 or srow < 0 or row < 0 or col < 0 or scol >= self.width or srow >= self.height or col >= self.width or row >= self.height:
+            return False
         if scol == 0 and srow == 0:
-            if [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+            if [srow+1,scol] == [row,col] and self.hWalls[row][col] == 0:
                 return True
-            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+            elif [srow,scol+1] == [row,col] and self.vWalls[row][col] == 0:
                 return True
             else:
                 return False
         elif scol == 0 and srow == self.height-1:
-            if [srow,scol] == [row-1,col] and self.hWalls[row-1][col] == 0:
+            if [srow-1,scol] == [row,col] and self.hWalls[row-1][col] == 0:
                 return True
-            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+            elif [srow,scol+1] == [row,col] and self.vWalls[row][col] == 0:
                 return True
             else:
                 return False
         elif scol == self.width-1 and srow == 0:
-            if [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+            if [srow+1,scol] == [row,col] and self.hWalls[row][col] == 0:
                 return True
-            elif [srow,scol] == [row,col-1] and self.vWalls[row][col-1] == 0:
+            elif [srow,scol-1] == [row,col] and self.vWalls[row][col-1] == 0:
                 return True
             else:
                 return False
         elif scol == self.width -1 and scol == self.width:
-            if [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+            if [srow-1,scol] == [row,col] and self.hWalls[row][col] == 0:
                 return True
-            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+            elif [srow,scol-1] == [row,col] and self.vWalls[row][col] == 0:
                 return True
             else:
                 return False
         elif scol == 0:
-            if [srow,scol] == [row-1,col] and self.hWalls[row-1][col] == 0:
+            if [srow+1,scol] == [row,col] and self.hWalls[row-1][col] == 0:
                 return True
-            elif [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+            elif [srow-1,scol] == [row,col] and self.hWalls[row][col] == 0:
                 return True
-            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+            elif [srow,scol-1] == [row,col] and self.vWalls[row][col] == 0:
                 return True
             else:
                 return False
         elif scol == self.width - 1:
-            if [srow,scol] == [row-1,col] and self.hWalls[row-1][col] == 0:
+            if [srow+1,scol] == [row,col] and self.hWalls[row-1][col] == 0:
                 return True
-            elif [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+            elif [srow-1,scol] == [row,col] and self.hWalls[row][col] == 0:
                 return True
-            elif [srow,scol] == [row,col-1] and self.vWalls[row][col-1] == 0:
+            elif [srow,scol+1] == [row,col] and self.vWalls[row][col-1] == 0:
                 return True
             else:
                 return False
         elif srow == 0:
-            if [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+            if [srow+1,scol] == [row,col] and self.hWalls[row-1][col] == 0:
                 return True
-            elif [srow,scol] == [row,col-1] and self.vWalls[row][col-1] == 0:
+            elif [srow,scol+1] == [row,col] and self.vWalls[row][col-1] == 0:
                 return True
-            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+            elif [srow,scol-1] == [row,col] and self.vWalls[row][col] == 0:
                 return True
             else:
                 return False
         elif srow == self.height -1:
-            if [srow,scol] == [row-1,col] and self.hWalls[row-1][col] == 0:
+            if [srow-1,scol] == [row,col] and self.hWalls[row-1][col] == 0:
                 return True
-            elif [srow,scol] == [row,col-1] and self.vWalls[row][col-1] == 0:
+            elif [srow,scol+1] == [row,col] and self.vWalls[row][col-1] == 0:
                 return True
-            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+            elif [srow,scol-1] == [row,col] and self.vWalls[row][col] == 0:
                 return True
             else:
                 return False
         else:
-            if [srow,scol] == [row-1,col] and self.hWalls[row-1][col] == 0:
+            if [srow+1,scol] == [row,col] and self.hWalls[row-1][col] == 0:
                 return True
-            elif [srow,scol] == [row+1,col] and self.hWalls[row][col] == 0:
+            elif [srow-1,scol] == [row,col] and self.hWalls[row][col] == 0:
                 return True
-            elif [srow,scol] == [row,col-1] and self.vWalls[row][col-1] == 0:
+            elif [srow,scol+1] == [row,col] and self.vWalls[row][col-1] == 0:
                 return True
-            elif [srow,scol] == [row,col+1] and self.vWalls[row][col] == 0:
+            elif [srow,scol-1] == [row,col] and self.vWalls[row][col] == 0:
                 return True
             else:
                 return False
@@ -154,16 +156,20 @@ class board:
         else:
             return False
 
-    def pathAvailable(self):
-        openNodes = [self.players[0]]
+    def pathAvailable(self,p):
+        """ runs a pathfinder algorithm to see if it is possible for both players to get from their point to the other side
+        :param p: which player you are searching for
+        :return:
+        """
+        openNodes = [self.players[p]]
         print 'open-start' + str(openNodes)
         closedNodes = []
         while openNodes != []:
             tempNodes = openNodes
-            openNodes = [] # issues with pointers
+            openNodes = []
             for i in range(len(tempNodes)):
                 closedNodes.append(tempNodes[i])
-                if tempNodes[i][0] == self.height-1:
+                if (tempNodes[i][0] == self.height-1 and p == 0) or (tempNodes[i][0] == 0 and p == 1):
                     return True
                 if self.canMove(tempNodes[i][0],tempNodes[i][1],tempNodes[i][0]+1,tempNodes[i][1]) and [tempNodes[i][0]+1,tempNodes[i][1]] not in closedNodes:
                     openNodes.append([tempNodes[i][0]+1,tempNodes[i][1]])
@@ -177,12 +183,19 @@ class board:
             print 'closed' + str(closedNodes)
         return False
 
+    def checkPaths(self):
+        """ checks both players to see if they can path to the opposite side
+        """
+        return True if self.pathAvailable(0) and self.pathAvailable(1) else False
+
 
 
 
 q = board(7,7)
 q.playWall(0,0,1)
 q.playWall(0,0,0)
-q.playWall(0,3,1)
+#q.playWall(0,3,1)
+q.playWall(0,2,0)
+q.playWall(0,3,0)
 print q
-print q.pathAvailable()
+print q.checkPaths()
