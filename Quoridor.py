@@ -49,6 +49,8 @@ class board:
             self.hWalls[row][col] = 1
 
     def canWall(self,row,col,vh):
+        if row < 0 or row >= self.height-1 or col < 0 or col >= self.width-1 or (vh == 0 and row == self.height-2) or (vh == 1 and col == self.width-2):
+            return False
         if vh == 0 and self.vWalls[row][col] == 0 and self.vWalls[row+1][col] == 0:
             return True
         elif vh == 1 and self.hWalls[row][col] == 0 and self.hWalls[row][col+1] == 0:
@@ -61,13 +63,21 @@ class board:
         :param vh: 0 for vertical 1 for horizontal
         :return: true if it works false if it doesn't
         """
-        if vh == 0 and self.vWalls[row][col] == 0 and self.vWalls[row+1][col] == 0:
+        if vh == 0 and self.canWall(row,col,vh):
             self.vWalls[row][col] = 1
             self.vWalls[row+1][col] = 1
+            if not self.checkPaths():
+                self.vWalls[row][col] = 0
+                self.vWalls[row+1][col] = 0
+                return False
             return True
-        elif vh == 1 and self.hWalls[row][col] == 0 and self.hWalls[row][col+1] == 0:
+        elif vh == 1 and self.canWall(row,col,vh):
             self.hWalls[row][col] = 1
             self.hWalls[row][col+1] = 1
+            if not self.checkPaths():
+                self.vWalls[row][col] = 0
+                self.vWalls[row][col+1] = 0
+                return False
             return True
         return False
 
@@ -199,33 +209,40 @@ class board:
         """
         return True if self.pathAvailable(0) and self.pathAvailable(1) else False
 
+    def checkWin(self):
+        if self.players[0][0] == self.height-1:
+            return 1
+        elif self.players[1][0] == 0:
+            return 2
+        else:
+            return 0
     def takeTurn(self,p):
-        a = input('1 for move player 2 for horizontal wall 3 for vertical wall')
+        print self
+        a = -1
+        while a not in [1,2,3]:
+            a = input('1 for move player 2 for horizontal wall 3 for vertical wall')
         if a == 1:
-            while self.movePlayer(input('row:'), input('column:'),p):
+            while not self.movePlayer(input('row:'), input('column:'),p):
                 True
         elif a == 2:
+            while not self.playWall(input('row:'), input('column:'),1):
+                True
         elif a == 3:
+            while not self.playWall(input('row:'), input('column:'),0):
+                True
 
+    def hostGame(self):
+        t = 0
+        while self.checkWin() == 0:
+            self.takeTurn(t)
+            t = 1 if t == 0 else 0
+
+        print 'Player ' + str(self.checkWin()) + 'Wins!'
 
 
 
 q = board(9,9)
-#q.playWall(0,0,1)
-#q.playWall(0,0,0)
-#q.playWall(0,2,1)
-#q.playWall(0,4,1)
-#q.playWall(0,5,1)
-#q.playWall(0,3,1)
-#q.playWall(0,2,0)
-#q.playWall(0,3,0)
-q.movePlayer(1,4,0)
-q.movePlayer(2,4,0)
-q.movePlayer(3,4,0)
-q.movePlayer(4,4,0)
-q.movePlayer(5,4,0)
-q.movePlayer(7,4,1)
-q.movePlayer(6,4,1)
-q.movePlayer(6,4,0)
-print q
+q.players[0] = [6,4]
+q.players[1] = [6,3]
+q.hostGame()
 #print q.checkPaths()
