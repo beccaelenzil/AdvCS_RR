@@ -36,6 +36,7 @@ class board:
             s += '+'
         s += '\n'
         return s
+
     def addWall(self,row,col,vh):
         """
         :param row: row
@@ -46,6 +47,13 @@ class board:
             self.vWalls[row][col] = 1
         elif vh == 1:
             self.hWalls[row][col] = 1
+
+    def canWall(self,row,col,vh):
+        if vh == 0 and self.vWalls[row][col] == 0 and self.vWalls[row+1][col] == 0:
+            return True
+        elif vh == 1 and self.hWalls[row][col] == 0 and self.hWalls[row][col+1] == 0:
+            return True
+        return False
 
     def playWall(self,row,col,vh):
         """
@@ -150,9 +158,12 @@ class board:
         tries to move player p(0 or 1) to row, col
         :return: true if worked false otherwise
         """
-        if self.canMove(self.players[p][0],self.players[p][1],row,col):#need to implement if other pawn is in way
+        if self.canMove(self.players[p][0],self.players[p][1],row,col) and self.players[p-1] != [row,col]:#need to implement if other pawn is in way
             self.players[p] = [row,col]
             return True
+        elif self.canMove(self.players[p][0],self.players[p][1],row,col) and self.players[p-1] == [row,col]\
+                and self.canMove(row,col,row+(row-self.players[p][0]),col+(col-self.players[p][1])):
+            self.players[p] = [row+(row-self.players[p][0]),col+(col-self.players[p][1])]
         else:
             return False
 
@@ -162,7 +173,7 @@ class board:
         :return:
         """
         openNodes = [self.players[p]]
-        print 'open-start' + str(openNodes)
+        #print 'open-start' + str(openNodes)
         closedNodes = []
         while openNodes != []:
             tempNodes = openNodes
@@ -179,8 +190,8 @@ class board:
                     openNodes.append([tempNodes[i][0],tempNodes[i][1]+1])
                 if self.canMove(tempNodes[i][0],tempNodes[i][1],tempNodes[i][0],tempNodes[i][1]-1) and [tempNodes[i][0],tempNodes[i][1]-1] not in closedNodes:
                     openNodes.append([tempNodes[i][0],tempNodes[i][1]-1])
-            print 'open' + str(openNodes)
-            print 'closed' + str(closedNodes)
+            #print 'open' + str(openNodes)
+            #print 'closed' + str(closedNodes)
         return False
 
     def checkPaths(self):
@@ -188,14 +199,33 @@ class board:
         """
         return True if self.pathAvailable(0) and self.pathAvailable(1) else False
 
+    def takeTurn(self,p):
+        a = input('1 for move player 2 for horizontal wall 3 for vertical wall')
+        if a == 1:
+            while self.movePlayer(input('row:'), input('column:'),p):
+                True
+        elif a == 2:
+        elif a == 3:
 
 
 
-q = board(7,7)
-q.playWall(0,0,1)
-q.playWall(0,0,0)
+
+q = board(9,9)
+#q.playWall(0,0,1)
+#q.playWall(0,0,0)
+#q.playWall(0,2,1)
+#q.playWall(0,4,1)
+#q.playWall(0,5,1)
 #q.playWall(0,3,1)
-q.playWall(0,2,0)
-q.playWall(0,3,0)
+#q.playWall(0,2,0)
+#q.playWall(0,3,0)
+q.movePlayer(1,4,0)
+q.movePlayer(2,4,0)
+q.movePlayer(3,4,0)
+q.movePlayer(4,4,0)
+q.movePlayer(5,4,0)
+q.movePlayer(7,4,1)
+q.movePlayer(6,4,1)
+q.movePlayer(6,4,0)
 print q
-print q.checkPaths()
+#print q.checkPaths()
