@@ -37,6 +37,9 @@ class board:
         s += '\n'
         return s
 
+    def getPlayerLocation(self,p):
+        return self.players[p]
+
     def addWall(self,row,col,vh):
         """
         :param row: row
@@ -49,6 +52,8 @@ class board:
             self.hWalls[row][col] = 1
 
     def canWall(self,row,col,vh):
+        """returns true if can place wall on row,col with orientation vh (0 for verticle 1 for horizontal)
+        """
         if row < 0 or row >= self.height-1 or col < 0 or col >= self.width-1 or (vh == 0 and row == self.height-2) or (vh == 1 and col == self.width-2):
             return False
         if vh == 0 and self.vWalls[row][col] == 0 and self.vWalls[row+1][col] == 0:
@@ -168,12 +173,13 @@ class board:
         tries to move player p(0 or 1) to row, col
         :return: true if worked false otherwise
         """
-        if self.canMove(self.players[p][0],self.players[p][1],row,col) and self.players[p-1] != [row,col]:#need to implement if other pawn is in way
+        if self.canMove(self.players[p][0],self.players[p][1],row,col) and self.players[p-1] != [row,col]:
             self.players[p] = [row,col]
             return True
         elif self.canMove(self.players[p][0],self.players[p][1],row,col) and self.players[p-1] == [row,col]\
                 and self.canMove(row,col,row+(row-self.players[p][0]),col+(col-self.players[p][1])):
             self.players[p] = [row+(row-self.players[p][0]),col+(col-self.players[p][1])]
+            return True
         else:
             return False
 
@@ -210,6 +216,9 @@ class board:
         return True if self.pathAvailable(0) and self.pathAvailable(1) else False
 
     def checkWin(self):
+        """checks win
+        :return:0 for no win 1 for player 0 win 2 for player 1 win
+        """
         if self.players[0][0] == self.height-1:
             return 1
         elif self.players[1][0] == 0:
@@ -217,6 +226,8 @@ class board:
         else:
             return 0
     def takeTurn(self,p):
+        """takes turn for player p
+        """
         print self
         a = -1
         while a not in [1,2,3]:
@@ -232,6 +243,8 @@ class board:
                 True
 
     def hostGame(self):
+        """Does game in console
+        """
         t = 0
         while self.checkWin() == 0:
             self.takeTurn(t)
@@ -239,10 +252,27 @@ class board:
 
         print 'Player ' + str(self.checkWin()) + 'Wins!'
 
+class visualBoard:
+    def __init__(self,width,height):
+        """makes the base board"""
+        self.b = board(width,height)
+        self.base = box(pos=(0,0,-.1),size=(2.5*width+.5,2.5*height+.5,.2),color=color.green)
+        self.tiles = [[0 for i in range(width)] for i in range(height)]
+        for j in range(height):
+            for i in range(width):
+                self.tiles[j][i] = box(pos=(i*2.5-1.25*(width-1),j*2.5-1.25*(height-1),.05),size=(2,2,.1),color=color.blue)
+        self.vWalls = [[0]*(width-1) for i in range(height)]
+        for j in range(height):
+            for i in range(width-1):
+                self.vWalls[j][i] = box(pos=(2.5+2.5*i-1.25*width,1.25+2.5*j-1.25*height,.025),size=(.5,2,.05),color=color.cyan)
+        self.hWalls = [[0]*width for i in range(height-1)]
+        for j in range(height-1):
+            for i in range(width):
+                self.hWalls[j][i] = box(pos=(1.25+2.5*i-1.25*width,2.5+2.5*j-1.25*height,.025),size=(2,.5,.05),color=color.cyan)
+        self.players = [cylinder(pos=(1.25+2.5*self.b.players[0][1]-1.25*width,1.25+2.5*self.b.players[0][0]-1.25*height,.2),axis=(0,0,1),radius=.75),\
+                        cylinder(pos=(1.25+2.5*self.b.players[1][1]-1.25*width,1.25+2.5*self.b.players[1][0]-1.25*height,.2),axis=(0,0,1),radius=.75)]
 
 
-q = board(9,9)
-q.players[0] = [6,4]
-q.players[1] = [6,3]
-q.hostGame()
+q = visualBoard(9,9)
+
 #print q.checkPaths()
