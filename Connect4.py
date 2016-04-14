@@ -225,7 +225,7 @@ b = Board(7,6)
 #b.hostGame()
 
 # Connect Four Tests
-"""
+
 print "---------------------------------------------"
 print "print a 7 x 6 board with the columns numbered"
 print "---------------------------------------------\n"
@@ -340,5 +340,5 @@ print "---------------------------------------------\n"
 # play your game with a friend, tell me who you played with, and confirm that everything works
 
 print "I played with Ben"
-print "Everything works!" """
+print "Everything works!"
 
