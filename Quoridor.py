@@ -1,5 +1,6 @@
 from visual import *
 from copy import *
+import random
 
 class board:
     def __init__(self,width,height):
@@ -250,10 +251,10 @@ class board:
             self.takeTurn(t)
             t = 1 if t == 0 else 0
 
-        print 'Player ' + str(self.checkWin()) + 'Wins!'
+        print 'Player ' + str(self.checkWin()) + ' Wins!'
 
 class visualBoard:
-    def __init__(self,width,height):
+    def __init__(self,width,height, playerOne, playerTwo):
         """makes the base board"""
         self.b = board(width,height)
         self.base = box(pos=(0,0,-.1),size=(2.5*width+.5,2.5*height+.5,.2),color=color.green)
@@ -269,10 +270,129 @@ class visualBoard:
         for j in range(height-1):
             for i in range(width):
                 self.hWalls[j][i] = box(pos=(1.25+2.5*i-1.25*width,2.5+2.5*j-1.25*height,.025),size=(2,.5,.05),color=color.cyan)
-        self.players = [cylinder(pos=(1.25+2.5*self.b.players[0][1]-1.25*width,1.25+2.5*self.b.players[0][0]-1.25*height,.2),axis=(0,0,1),radius=.75),\
-                        cylinder(pos=(1.25+2.5*self.b.players[1][1]-1.25*width,1.25+2.5*self.b.players[1][0]-1.25*height,.2),axis=(0,0,1),radius=.75)]
+        self.players = [cylinder(pos=(1.25+2.5*self.b.players[0][1]-1.25*width,1.25+2.5*self.b.players[0][0]-1.25*height,.2),axis=(0,0,1),radius=.75,color=color.white),\
+                        cylinder(pos=(1.25+2.5*self.b.players[1][1]-1.25*width,1.25+2.5*self.b.players[1][0]-1.25*height,.2),axis=(0,0,1),radius=.75,color=color.black)]
+        self.playerType = ["AI" if playerOne == 'AI' else "Human", "AI" if playerTwo == "AI" else "Human"]
+    def waitInput(self):
+        """ waits for input from player then returns an array [type selected, x position, y position]
+        """
+        while True:
+            rate(100)
+            if scene.mouse.clicked:
+                m = scene.mouse.getclick()
+                obj = scene.mouse.pick
+                if obj.__class__ == box:
+                    if obj.size == (2,2,.1):
+                        for y in range(len(q.tiles)):
+                            for x in range(len(q.tiles[0])):
+                                if q.tiles[y][x] == obj:
+                                    return ["tile",x,y]
+                    if obj.size == (.5,2,.05):
+                        for y in range(len(q.vWalls)):
+                            for x in range(len(q.vWalls[0])):
+                                if q.vWalls[y][x] == obj:
+                                    return ["vWalls",x,y]
+                    if obj.size == (2,.5,.05):
+                        for y in range(len(q.hWalls)):
+                            for x in range(len(q.hWalls[0])):
+                                if q.hWalls[y][x] == obj:
+                                    return ["hWalls",x,y]
+
+    def AIInput(self,p):
+        a = random.randint(0,1) #0 for movement 1 for wall
+        if a == 0: #tries to move towards opposite end, then randomly left or right then up
+            if not self.b.movePlayer(self.b.players[p][0]+(1 if p == 0 else -1),\
+                                 self.b.players[p][1], p):
+                a = random.randrange(-1,2,2)
+                if not self.b.movePlayer(self.b.players[p][0],\
+                                 self.b.players[p][1]+a, p):
+                    if not self.b.movePlayer(self.b.players[p][0],\
+                                 self.b.players[p][1], p):
+                        self.b.movePlayer(self.b.players[p][0]+(-1 if p == 0 else 1),\
+                                 self.b.players[p][1], p)
+        elif a == 1: #places a random wall
+            vh = random.randint(0,1) #0 for vert 1 for hor
+            row = random.randint(0,self.b.height-1)
+            col = random.randint(0,self.b.width-1)
+            while not self.b.playWall(row,col,vh):
+                row = random.randint(0,self.b.height-1)
+                col = random.randint(0,self.b.width-2)
+
+    def updateBoard(self):
+        """ update board to be same as text board
+        """
+        for row in range(len(self.vWalls)):
+            for col in range(len(self.vWalls[0])):
+                if self.b.vWalls[row][col] == 1  and self.vWalls[row][col].size != (.5,2,1):
+                    self.vWalls[row][col].size = (.5,2,2)
+                    self.vWalls[row][col].color = color.yellow
+        for row in range(len(self.hWalls)):
+            for col in range(len(self.hWalls[0])):
+                if self.b.hWalls[row][col] == 1  and self.hWalls[row][col].size != (.5,2,1):
+                    self.hWalls[row][col].size = (2,.5,2)
+                    self.hWalls[row][col].color = color.yellow
+        self.players[0].pos = (1.25+2.5*self.b.players[0][1]-1.25*self.b.width,1.25+2.5*self.b.players[0][0]-1.25*self.b.height,.2)
+        self.players[1].pos = (1.25+2.5*self.b.players[1][1]-1.25*self.b.width,1.25+2.5*self.b.players[1][0]-1.25*self.b.height,.2)
 
 
-q = visualBoard(9,9)
+    def humanInput(self,p):
+        """takes turn for player p
+        """
+        while True:
+            a = self.waitInput()
+            if a[0] == "tile" and self.b.movePlayer(a[2],a[1],p):
+                break
+            elif a[0] == "hWalls" and self.b.playWall(a[2], a[1],1):
+                break
+            elif a[0] == "vWalls" and self.b.playWall(a[2], a[1],0):
+                break
+
+    def takeTurn(self,p):
+        if self.playerType[p] == "AI":
+            self.AIInput(p)
+        elif self.playerType[p] == "Human":
+            self.humanInput(p)
+
+
+    def hostGame(self):
+        """plays game
+        """
+        p = 0
+        while self.b.checkWin() == 0:
+            self.takeTurn(p)
+            self.updateBoard()
+            p = 1 if p == 0 else 0
+        text(text=('Player ' + str(self.b.checkWin()) + ' Wins!'), pos=(0,0,2), align='center', color=color.green)
+
+class basicPlayer():
+    def __init__(self,p):
+        self.type = "basic"
+        self.playerNum = p
+    def move(self, b):
+        a = random.randInt(0,1) #0 for movement 1 for wall
+        if a == 0: #tries to move towards opposite end, then randomly left or right then up
+            if not self.b.movePlayer(self.b.players[self.playerNum][0]+(1 if self.playerNum == 0 else -1),\
+                                 self.b.players[self.playerNum][1], self.playerNum):
+                a = random.randrange(-1,2,2)
+                if not self.b.movePlayer(self.b.players[self.playerNum][0],\
+                                 self.b.players[self.playerNum][1]+a, self.playerNum):
+                    if not self.b.movePlayer(self.b.players[self.playerNum][0],\
+                                 self.b.players[self.playerNum][1], self.playerNum):
+                        self.b.movePlayer(self.b.players[self.playerNum][0]+(-1 if self.playerNum == 0 else 1),\
+                                 self.b.players[self.playerNum][1], self.playerNum)
+        elif a == 1: #places a random wall
+            vh = random.randInt(0,1) #0 for vert 1 for hor
+            row = random.randInt(0,self.b.height-1)
+            col = random.randInt(0,self.b.width-1)
+            while not self.b.playWall(row,col,vh):
+                row = random.randInt(0,self.b.height-1)
+                col = random.randInt(0,self.b.width-2)
+
+
+
+
+
+q = visualBoard(9,9,"AI","Human")
+q.hostGame()
 
 #print q.checkPaths()
