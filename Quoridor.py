@@ -1,6 +1,7 @@
 from visual import *
 from copy import *
 import random
+import time
 
 class board:
     def __init__(self,width,height):
@@ -55,7 +56,7 @@ class board:
     def canWall(self,row,col,vh):
         """returns true if can place wall on row,col with orientation vh (0 for verticle 1 for horizontal)
         """
-        if row < 0 or row >= self.height-1 or col < 0 or col >= self.width-1 or (vh == 0 and row == self.height-2) or (vh == 1 and col == self.width-2):
+        if row < 0 or row >= self.height-1 or col < 0 or col >= self.width-1 or (vh == 0 and row == self.height-1) or (vh == 1 and col == self.width-1):
             return False
         if vh == 0 and self.vWalls[row][col] == 0 and self.vWalls[row+1][col] == 0:
             return True
@@ -299,6 +300,10 @@ class visualBoard:
                                     return ["hWalls",x,y]
 
     def AIInput(self,p):
+        """ makes move for AI player
+        :param p: player being played for
+        """
+        time.sleep(1)
         a = random.randint(0,1) #0 for movement 1 for wall
         if a == 0: #tries to move towards opposite end, then randomly left or right then up
             if not self.b.movePlayer(self.b.players[p][0]+(1 if p == 0 else -1),\
@@ -364,35 +369,8 @@ class visualBoard:
             p = 1 if p == 0 else 0
         text(text=('Player ' + str(self.b.checkWin()) + ' Wins!'), pos=(0,0,2), align='center', color=color.green)
 
-class basicPlayer():
-    def __init__(self,p):
-        self.type = "basic"
-        self.playerNum = p
-    def move(self, b):
-        a = random.randInt(0,1) #0 for movement 1 for wall
-        if a == 0: #tries to move towards opposite end, then randomly left or right then up
-            if not self.b.movePlayer(self.b.players[self.playerNum][0]+(1 if self.playerNum == 0 else -1),\
-                                 self.b.players[self.playerNum][1], self.playerNum):
-                a = random.randrange(-1,2,2)
-                if not self.b.movePlayer(self.b.players[self.playerNum][0],\
-                                 self.b.players[self.playerNum][1]+a, self.playerNum):
-                    if not self.b.movePlayer(self.b.players[self.playerNum][0],\
-                                 self.b.players[self.playerNum][1], self.playerNum):
-                        self.b.movePlayer(self.b.players[self.playerNum][0]+(-1 if self.playerNum == 0 else 1),\
-                                 self.b.players[self.playerNum][1], self.playerNum)
-        elif a == 1: #places a random wall
-            vh = random.randInt(0,1) #0 for vert 1 for hor
-            row = random.randInt(0,self.b.height-1)
-            col = random.randInt(0,self.b.width-1)
-            while not self.b.playWall(row,col,vh):
-                row = random.randInt(0,self.b.height-1)
-                col = random.randInt(0,self.b.width-2)
+q = visualBoard(9,9,"AI","AI")
 
-
-
-
-
-q = visualBoard(9,9,"AI","Human")
 q.hostGame()
 
 #print q.checkPaths()
