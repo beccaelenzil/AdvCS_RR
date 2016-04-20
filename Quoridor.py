@@ -258,22 +258,23 @@ class visualBoard:
     def __init__(self,width,height, playerOne, playerTwo):
         """makes the base board"""
         self.b = board(width,height)
-        self.base = box(pos=(0,0,-.1),size=(2.5*width+.5,2.5*height+.5,.2),color=color.green)
+        self.base = box(pos=(0,0,-.1),size=(2.5*width+.5,2.5*height+.5,.2),material=materials.wood)
         self.tiles = [[0 for i in range(width)] for i in range(height)]
         for j in range(height):
             for i in range(width):
-                self.tiles[j][i] = box(pos=(i*2.5-1.25*(width-1),j*2.5-1.25*(height-1),.05),size=(2,2,.1),color=color.blue)
+                self.tiles[j][i] = box(pos=(i*2.5-1.25*(width-1),j*2.5-1.25*(height-1),.05),size=(2,2,.1),material=materials.marble)
         self.vWalls = [[0]*(width-1) for i in range(height)]
         for j in range(height):
             for i in range(width-1):
-                self.vWalls[j][i] = box(pos=(2.5+2.5*i-1.25*width,1.25+2.5*j-1.25*height,.025),size=(.5,2,.05),color=color.cyan)
+                self.vWalls[j][i] = box(pos=(2.5+2.5*i-1.25*width,1.25+2.5*j-1.25*height,.025),size=(.5,2,.05),material = materials.wood)
         self.hWalls = [[0]*width for i in range(height-1)]
         for j in range(height-1):
             for i in range(width):
-                self.hWalls[j][i] = box(pos=(1.25+2.5*i-1.25*width,2.5+2.5*j-1.25*height,.025),size=(2,.5,.05),color=color.cyan)
+                self.hWalls[j][i] = box(pos=(1.25+2.5*i-1.25*width,2.5+2.5*j-1.25*height,.025),size=(2,.5,.05),material = materials.wood)
         self.players = [cylinder(pos=(1.25+2.5*self.b.players[0][1]-1.25*width,1.25+2.5*self.b.players[0][0]-1.25*height,.2),axis=(0,0,1),radius=.75,color=color.white),\
                         cylinder(pos=(1.25+2.5*self.b.players[1][1]-1.25*width,1.25+2.5*self.b.players[1][0]-1.25*height,.2),axis=(0,0,1),radius=.75,color=color.black)]
         self.playerType = ["AI" if playerOne == 'AI' else "Human", "AI" if playerTwo == "AI" else "Human"]
+
     def waitInput(self):
         """ waits for input from player then returns an array [type selected, x position, y position]
         """
@@ -331,11 +332,12 @@ class visualBoard:
                 if self.b.vWalls[row][col] == 1  and self.vWalls[row][col].size != (.5,2,1):
                     self.vWalls[row][col].size = (.5,2,2)
                     self.vWalls[row][col].color = color.yellow
+                    self.vWalls[row][col].material = materials.plastic
         for row in range(len(self.hWalls)):
             for col in range(len(self.hWalls[0])):
                 if self.b.hWalls[row][col] == 1  and self.hWalls[row][col].size != (.5,2,1):
                     self.hWalls[row][col].size = (2,.5,2)
-                    self.hWalls[row][col].color = color.yellow
+                    self.hWalls[row][col].material = materials.plastic
         self.players[0].pos = (1.25+2.5*self.b.players[0][1]-1.25*self.b.width,1.25+2.5*self.b.players[0][0]-1.25*self.b.height,.2)
         self.players[1].pos = (1.25+2.5*self.b.players[1][1]-1.25*self.b.width,1.25+2.5*self.b.players[1][0]-1.25*self.b.height,.2)
 
@@ -358,7 +360,6 @@ class visualBoard:
         elif self.playerType[p] == "Human":
             self.humanInput(p)
 
-
     def hostGame(self):
         """plays game
         """
@@ -369,8 +370,60 @@ class visualBoard:
             p = 1 if p == 0 else 0
         text(text=('Player ' + str(self.b.checkWin()) + ' Wins!'), pos=(0,0,2), align='center', color=color.green)
 
-q = visualBoard(9,9,"Human","AI")
+class Game:
+    def __init__(self):
+        self.startGame()
 
-q.hostGame()
+    def startGame(self):
+        scene = display(title = "Quoridor",width=800,height=600)
+        scene.select()
+        scene.autoscale = True
+        txt = text(text = "Welome to Quoridor:\n"+\
+        "The objective is to be the first player to move their pawn\n"+
+        "to any space on the opposite side of the gameboard from which it begins.\n"+\
+        "Each turn you can either play a wall, which obstructs movement,\n"+\
+        "or move your piece to an adjacent square, or hop your opponent.\n"+\
+        "Click each of the below text to switch between AI and Human players.\n"+\
+        "Player 1:   Player 2:", align='center', color = color.green)
+        txt.pos = (0,10,0)
+        pOne = text(text = "Human", align='right',pos=(-.5,-1,0), color = color.yellow)
+        pOneBox = box(size=(5,1,1), pos=(-3,-.5,-1),color=color.black)
+        pTwo = text(text = "AI", align = 'left', pos=(.5,-1,0), color = color.cyan)
+        pTwoBox = box(size = (5,1,1),pos=(3,-.5,-1),color=color.black)
+        start = text(text = "Start", align='center',pos=(0,-3,0),color = color.green)
+        startBox = box(size = (4,1,1),pos=(0,-2.5,-1),color=color.black)
+        while True:
+            rate(100)
+            if scene.mouse.clicked:
+                m = scene.mouse.getclick()
+                obj = scene.mouse.pick
+                if obj.__class__ == box:
+                    if obj == pOneBox:
+                        if pOne.text == "Human":
+                            pOne.text = "AI"
+                            pOne.color = color.cyan
+                        else:
+                            pOne.text = "Human"
+                            pOne.color = color.yellow
+                    elif obj == pTwoBox:
+                        if pTwo.text == "Human":
+                            pTwo.text = "AI"
+                            pTwo.color = color.cyan
+                        else:
+                            pTwo.text = "Human"
+                            pTwo.color = color.yellow
+                    elif obj == startBox:
+                        txt.visible = False
+                        pOne.visible = False
+                        pOneBox.visible = False
+                        pTwo.visible = False
+                        pTwoBox.visible = False
+                        start.visible = False
+                        startBox.visible = False
+                        q = visualBoard(9,9,pOne.text,pTwo.text)
+                        q.hostGame()
+
+
+q = Game()
 
 #print q.checkPaths()
