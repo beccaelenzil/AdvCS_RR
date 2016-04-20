@@ -362,14 +362,21 @@ class visualBoard:
     def hostGame(self):
         """plays game
         """
+        i = 0
         p = 0
         while self.b.checkWin() == 0:
             self.takeTurn(p)
+            sleep(0.01) # becca added sleep
             self.updateBoard()
             p = 1 if p == 0 else 0
+            i += 1
+            print i
         text(text=('Player ' + str(self.b.checkWin()) + ' Wins!'), pos=(0,0,2), align='center', color=color.green)
 
-q = visualBoard(9,9,"Human","AI")
+#q = visualBoard(9,9,"Human","AI")
+
+
+q = visualBoard(9,9,"AI","AI")
 
 q.hostGame()
 
