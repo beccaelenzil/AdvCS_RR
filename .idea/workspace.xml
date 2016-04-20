@@ -26,9 +26,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="223" column="14" selection-start-line="223" selection-start-column="14" selection-end-line="223" selection-end-column="14" />
-              <folding>
-                <marker date="1460949828077" expanded="true" signature="8197:11200" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -48,8 +46,8 @@
       <file leaf-file-name="Quoridor.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Quoridor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.2616408">
-              <caret line="371" column="23" selection-start-line="371" selection-start-column="23" selection-end-line="371" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.4503171">
+              <caret line="366" column="18" selection-start-line="366" selection-start-column="18" selection-end-line="366" selection-end-column="18" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -61,7 +59,7 @@
         <entry file="file://$PROJECT_DIR$/Sort.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -202,10 +200,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.project" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Python.Quoridor">
+  <component name="RunManager" selected="Python.Sort">
     <configuration default="false" name="Connect4" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -422,8 +420,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Quoridor" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Sort" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Sort" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Quoridor" />
         <item index="2" class="java.lang.String" itemvalue="Python.Connect4Player" />
         <item index="3" class="java.lang.String" itemvalue="Python.Connect4" />
         <item index="4" class="java.lang.String" itemvalue="Python.RobotsandZombies" />
@@ -435,13 +433,13 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="793" y="0" width="814" height="867" extended-state="0" />
-    <editor active="true" />
+    <frame x="793" y="0" width="814" height="867" extended-state="1" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24871135" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24185464" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32597402" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987013" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3324573" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3231162" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -476,9 +474,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="223" column="14" selection-start-line="223" selection-start-column="14" selection-end-line="223" selection-end-column="14" />
-          <folding>
-            <marker date="1460949828077" expanded="true" signature="8197:11200" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -550,9 +546,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="223" column="14" selection-start-line="223" selection-start-column="14" selection-end-line="223" selection-end-column="14" />
-          <folding>
-            <marker date="1460949828077" expanded="true" signature="8197:11200" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -624,9 +618,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="223" column="14" selection-start-line="223" selection-start-column="14" selection-end-line="223" selection-end-column="14" />
-          <folding>
-            <marker date="1460949828077" expanded="true" signature="8197:11200" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -698,9 +690,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1460949828077" expanded="true" signature="8197:11200" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -736,26 +726,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Connect4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="223" column="14" selection-start-line="223" selection-start-column="14" selection-end-line="223" selection-end-column="14" />
-          <folding>
-            <marker date="1460949828077" expanded="true" signature="8197:11200" placeholder="&quot;&quot;&quot;...&quot;&quot;&quot;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Connect4Player.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="101" column="25" selection-start-line="101" selection-start-column="25" selection-end-line="101" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -778,18 +748,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Connect4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="223" column="14" selection-start-line="223" selection-start-column="14" selection-end-line="223" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python27/site-packages/matplotlib/backends/backend_tkagg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33266932">
+          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Sort.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Connect4Player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="101" column="25" selection-start-line="101" selection-start-column="25" selection-end-line="101" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Quoridor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.2616408">
-          <caret line="371" column="23" selection-start-line="371" selection-start-column="23" selection-end-line="371" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.4503171">
+          <caret line="366" column="18" selection-start-line="366" selection-start-column="18" selection-end-line="366" selection-end-column="18" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>

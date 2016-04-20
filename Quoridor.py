@@ -369,7 +369,7 @@ class visualBoard:
             p = 1 if p == 0 else 0
         text(text=('Player ' + str(self.b.checkWin()) + ' Wins!'), pos=(0,0,2), align='center', color=color.green)
 
-q = visualBoard(9,9,"AI","AI")
+q = visualBoard(9,9,"Human","AI")
 
 q.hostGame()
 
