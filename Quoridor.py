@@ -262,7 +262,7 @@ class visualBoard:
         self.tiles = [[0 for i in range(width)] for i in range(height)]
         for j in range(height):
             for i in range(width):
-                self.tiles[j][i] = box(pos=(i*2.5-1.25*(width-1),j*2.5-1.25*(height-1),.05),size=(2,2,.1),material=materials.marble)
+                self.tiles[j][i] = box(pos=(i*2.5-1.25*(width-1),j*2.5-1.25*(height-1),.05),size=(2,2,.1),material=materials.wood,color=color.gray(.4))
         self.vWalls = [[0]*(width-1) for i in range(height)]
         for j in range(height):
             for i in range(width-1):
@@ -337,6 +337,7 @@ class visualBoard:
             for col in range(len(self.hWalls[0])):
                 if self.b.hWalls[row][col] == 1  and self.hWalls[row][col].size != (.5,2,1):
                     self.hWalls[row][col].size = (2,.5,2)
+                    self.hWalls[row][col].color = color.yellow
                     self.hWalls[row][col].material = materials.plastic
         self.players[0].pos = (1.25+2.5*self.b.players[0][1]-1.25*self.b.width,1.25+2.5*self.b.players[0][0]-1.25*self.b.height,.2)
         self.players[1].pos = (1.25+2.5*self.b.players[1][1]-1.25*self.b.width,1.25+2.5*self.b.players[1][0]-1.25*self.b.height,.2)
@@ -420,10 +421,12 @@ class Game:
                         pTwoBox.visible = False
                         start.visible = False
                         startBox.visible = False
-                        q = visualBoard(9,9,pOne.text,pTwo.text)
-                        q.hostGame()
+                        self.q = visualBoard(9,9,pOne.text,pTwo.text)
+                        self.q.hostGame()
 
 
-q = Game()
+#q = Game()
+q = visualBoard(9,9,"Human","AI")
+q.hostGame()
 
 #print q.checkPaths()
