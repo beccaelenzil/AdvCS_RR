@@ -12,6 +12,8 @@ class board:
         self.players = [[0,int(self.width/2)],[self.height-1, int(self.width/2)]]
 
     def __repr__(self):
+        """prints board
+        """
         s = 'Quoridor\n----------\n'
         for col in range(self.width):
             s += '+-'
@@ -425,8 +427,8 @@ class Game:
                         self.q.hostGame()
 
 
-#q = Game()
-q = visualBoard(9,9,"Human","AI")
-q.hostGame()
+q = Game()
+#q = visualBoard(9,9,"Human","AI")
+#q.hostGame()
 
 #print q.checkPaths()
