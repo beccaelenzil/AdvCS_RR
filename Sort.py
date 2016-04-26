@@ -51,12 +51,12 @@ def shellSort(array, dif):
         shellSort(array,int(dif/2))
 
 def quickSort(array, start, stop):
-    if stop-start<1:
-        return
+    if stop-start < 1:
+        return array
     else:
         left = start
         right = stop
-        pivot = array[0]
+        pivot = array[start]
         while left <= right:
             while array[left] < pivot:
                 left += 1
@@ -70,7 +70,7 @@ def quickSort(array, start, stop):
         quickSort(array,start,right)
         quickSort(array,left,stop)
 
-quickSort([39,30,45,33,20,61,36,5,31,64],0,9)
+quickSort(randList(20),0,19)
 
 
 
