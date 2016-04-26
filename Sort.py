@@ -70,13 +70,65 @@ def quickSort(array, start, stop):
         quickSort(array,start,right)
         quickSort(array,left,stop)
 
-quickSort(randList(20),0,19)
+def mergeSort(array):
+    print "Splitting ",array
+    if len(array)>1:
+        mid = len(array)//2
+        lefthalf = array[:mid]
+        righthalf = array[mid:]
 
+        mergeSort(lefthalf)
+        mergeSort(righthalf)
 
+        i=0
+        j=0
+        k=0
+        while i < len(lefthalf) and j < len(righthalf):
+            if lefthalf[i] < righthalf[j]:
+                array[k]=lefthalf[i]
+                i=i+1
+            else:
+                array[k]=righthalf[j]
+                j=j+1
+            k=k+1
 
-#num_iter = []
-#for i in range(100):
-#    n = selectSort(randList(100))
-#    num_iter.append(n)
-#ave_iter = sum(num_iter)/len(num_iter)
-#print ave_iter
+        while i < len(lefthalf):
+            array[k]=lefthalf[i]
+            i=i+1
+            k=k+1
+
+        while j < len(righthalf):
+            array[k]=righthalf[j]
+            j=j+1
+            k=k+1
+    print "Merging ",array
+
+def mergeMyWay(array):
+    array = [[array[x]] for x in range(len(array))]
+    print array
+    mergeRecurse(array)
+
+def mergeRecurse(array):
+    for i in range(len(array)//2):
+        merge(array,i)
+    print array
+    if len(array) == 1:
+        return array
+    return mergeRecurse(array)
+
+def merge(array, index):
+    array[index] = [(array[index+1].pop(0) if len(array[index])==0 else array[index].pop(0))\
+                        if len(array[index]) == 0 or len(array[index+1]) == 0 else\
+                        (array[index].pop(0) if array[index][0] < array[index+1][0] else array[index+1].pop(0)) for i in range(len(array[index])+len(array[index+1]))]
+    array.pop(index+1)
+"""
+array = randList(10)
+print array
+array = [[array[x]] for x in range(len(array))]
+print array
+mergeRecurse(array)
+print array
+"""
+myList = randList(10)
+mergeMyWay(myList)
+print myList
