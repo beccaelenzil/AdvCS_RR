@@ -376,7 +376,7 @@ class visualBoard:
 #q = visualBoard(9,9,"Human","AI")
 
 
-q = visualBoard(9,9,"AI","AI")
+q = visualBoard(9,9,"Human","AI")
 
 q.hostGame()
 
