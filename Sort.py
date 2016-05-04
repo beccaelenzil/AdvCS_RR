@@ -106,7 +106,7 @@ def mergeSort(array):
 def mergeMyWay(array):
     array = [[array[x]] for x in range(len(array))]
     print array
-    mergeRecurse(array)
+    return mergeRecurse(array)[0]
 
 def mergeRecurse(array):
     for i in range(len(array)//2):
@@ -130,5 +130,5 @@ mergeRecurse(array)
 print array
 """
 myList = randList(10)
-mergeMyWay(myList)
+myList = mergeMyWay(myList)
 print myList
