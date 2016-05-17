@@ -376,8 +376,8 @@ class visualBoard:
 #q = visualBoard(9,9,"Human","AI")
 
 
-q = visualBoard(9,9,"Human","AI")
+#q = visualBoard(9,9,"Human","AI")
 
-q.hostGame()
+#q.hostGame()
 
 #print q.checkPaths()
