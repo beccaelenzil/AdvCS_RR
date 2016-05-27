@@ -132,7 +132,3 @@ print array
 #myList = randList(10)
 #myList = mergeMyWay(myList)
 #print myList
-y = [i for i in range(20,100,3)]
-x = [i for i in range(len(y))]
-plt.scatter(x,y)
-plt.show()
