@@ -89,9 +89,10 @@ class evolution:
         prnt = "Group 1:\n"
         for i in range(self.num):
             prnt += str(i) + ": " + self.genepool[0][i].__repr__() + "\n"
-        prnt += "Group 2:\n"
+        prnt += str(self.avgFitness()[0]) + "\nGroup 2:\n"
         for i in range(self.num):
             prnt += str(i) + ": " + self.genepool[1][i].__repr__() + "\n"
+        prnt += str(self.avgFitness()[1])
         return prnt
 
     def avgFitness(self):
@@ -103,7 +104,6 @@ class evolution:
             a[0] += self.genepool[0][i].fitness
             a[1] += self.genepool[1][i].fitness
         return [round(a[0]/self.num,3), round(a[1]/self.num,3)]
-
 
     def isFull(self):
         """
@@ -191,12 +191,14 @@ class evolution:
             self.cull()
             self.rePop()
             self.refresh()
+        self.fight()
+        self.sort()
+        print self
         plt.scatter([x for x in range(len(a))],a,color = "red")
         plt.scatter([x for x in range(len(b))],b,color = "green")
         plt.show()
 
-
-class statPlayer():
+class statPlayer:
     def __init__(self, plays = [], strtnum = 2):
         self.strtnum = strtnum
         self.plays = plays
@@ -207,7 +209,7 @@ class statPlayer():
         self.fitness = 0.0
 
     def __repr__(self):
-        prnt = str(self.plays) + str(sum(self.plays)) + "fitness: " + str(self.fitness)
+        prnt = str(self.plays) + "fitness: " + str(self.fitness)
         return prnt
 
     def __gt__(self, other):
@@ -289,6 +291,8 @@ class statEvolution:
         """
         :return: average fitness of both genepools in a list [genepool1, genepool2]
         """
+        if None in self.genepool[0]:
+            return [0,0]
         a = [0,0]
         for i in range(self.num):
             a[0] += self.genepool[0][i].fitness
@@ -381,27 +385,64 @@ class statEvolution:
             self.cull()
             self.rePop()
             self.refresh()
+        self.fight()
+        self.sort()
+        print self
         plt.scatter([x for x in range(len(a))],a,color = "red")
         plt.scatter([x for x in range(len(b))],b,color = "green")
         plt.show()
 """
-a = [[1, 0, 2],
-[-1, 4, 1],
-[3, 2, -4]]
+#No Dom Zero Sum
+a = [[1,0,2],
+    [-1,4,1],
+    [3,2,-4]]
+
 b = [[-1,1,-3],
      [0,-4,-2],
-     [-2,-1,4],]
-"""
+     [-2,-1,4]]
+#Prisoner's
+a = [[-8,11],
+     [-10,10]]
+#No Dom
+a = [[4,2,2],
+     [3,0,5],
+     [1,4,6]]
+b = [[2,6,4],
+     [4,1,3],
+     [5,3,1]]
+#ESS
 a = [[-25,50,50,-25,12.5],
      [0,15,0,15,7.5],
      [0,50,25,0,25],
      [-25,15,50,15,-5],
      [-12.5,32.5,25,-5,25]]
-e = statEvolution(50,25,a,a)
-e.generation(200)
+"""
+
+#ESS maybe?
+a = [[4,5,2],
+    [2,3,6],
+    [1,3,8]]
+
+b = [[5,4,1],
+    [4,0,3],
+    [2,2,10]]
+
+#e = evolution(50,25,a,b) #Red is p1 Green p2
+#e.generation(500)
+#e = statEvolution(50,25,a,b)
+# e.generation(500)
+e = statEvolution(10,10,a,b)
+print e
 e.fight()
+print e
 e.sort()
 print e
+e.cull()
+print e
+e.rePop()
+e.refresh()
+print e
+
 """
 a = [[-25,50,50,-25,12.5],
      [0,15,0,15,7.5],
@@ -414,13 +455,4 @@ a = [[-25,30,30,-25],
     [0,50,0,15],
     [0,30,50,0],
     [-25,15,30,15]]
-
-e = evolution(50, 25,a, a)
-e.generation(500)
-e.fight()
-e.sort()
-print e
-#1 0 2
-#-1 4 1
-#3 2 -4
 """
