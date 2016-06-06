@@ -391,6 +391,7 @@ class statEvolution:
         plt.scatter([x for x in range(len(a))],a,color = "red")
         plt.scatter([x for x in range(len(b))],b,color = "green")
         plt.show()
+
 """
 #No Dom Zero Sum
 a = [[1,0,2],
@@ -410,13 +411,13 @@ a = [[4,2,2],
 b = [[2,6,4],
      [4,1,3],
      [5,3,1]]
+
 #ESS
 a = [[-25,50,50,-25,12.5],
      [0,15,0,15,7.5],
      [0,50,25,0,25],
      [-25,15,50,15,-5],
      [-12.5,32.5,25,-5,25]]
-"""
 
 #ESS maybe?
 a = [[4,5,2],
@@ -426,22 +427,29 @@ a = [[4,5,2],
 b = [[5,4,1],
     [4,0,3],
     [2,2,10]]
+"""
+a = [[1,2,3],
+     [4,5,6],
+     [7,8,9]]
 
-#e = evolution(50,25,a,b) #Red is p1 Green p2
-#e.generation(500)
+b = a
+e = evolution(50,25,a,b) #Red is p1 Green p2
+e.generation(500)
+e = statEvolution(50,25,a,b)
+e.generation(500)
 #e = statEvolution(50,25,a,b)
-# e.generation(500)
-e = statEvolution(10,10,a,b)
-print e
-e.fight()
-print e
-e.sort()
-print e
-e.cull()
-print e
-e.rePop()
-e.refresh()
-print e
+#e.generation(500)
+#e = statEvolution(10,10,a,b)
+#print e
+#e.fight()
+#print e
+#e.sort()
+#print e
+#e.cull()
+#print e
+#e.rePop()
+#e.refresh()
+#print e
 
 """
 a = [[-25,50,50,-25,12.5],
@@ -449,8 +457,7 @@ a = [[-25,50,50,-25,12.5],
      [0,50,25,0,25],
      [-25,15,50,15,-5],
      [-12.5,32.5,25,-5,25]]
-"""
-"""
+
 a = [[-25,30,30,-25],
     [0,50,0,15],
     [0,30,50,0],
